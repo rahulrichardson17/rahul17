@@ -1,23 +1,28 @@
 pipeline {
     agent any
        stages {
-            stage('Build') {
+            stage('Validate') {
                    steps {
-                   echo "Build Successfull!"
+                   bat "mvn clean"
+                   bat "mvn validate"
+                   echo "Validate Successfull!"
+                         }
+              }
+              stage('Compile') {
+                   steps {
+                   bat "mvn compile"
+                   echo "Compile Successfull!"
                          }
               }
               stage('Test') {
                    steps {
+                   bat "mvn test"
                    echo "Test Successfull!"
                          }
               }
-              stage('Deploy') {
+              stage('Install') {
                    steps {
-                   echo "Deploy Successfull!"
-                         }
-              }
-              stage('Release') {
-                   steps {
+                   bat "mvn install"
                    echo "Release Successfull!"
                          }
               }
